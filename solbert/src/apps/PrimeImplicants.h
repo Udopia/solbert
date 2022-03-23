@@ -26,6 +26,15 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 #ifndef SRC_APPS_PRIMEIMPLICANTS_H_
 #define SRC_APPS_PRIMEIMPLICANTS_H_
 
+/**
+ * @brief Get prime implicants 
+ * formula must resemble a monotonic function of inputs
+ * inputs must be pure and positive in formula
+ * 
+ * @param formula 
+ * @param inputs 
+ * @return std::vector<std::vector<int>> 
+ */
 std::vector<std::vector<int>> get_prime_implicants(std::vector<std::vector<int>> formula, std::vector<int> inputs) {
     // initialize solver
     void* S = ipasir_init();
