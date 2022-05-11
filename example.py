@@ -27,7 +27,10 @@ def main():
     parser = argparse.ArgumentParser(description='Replace Subformulas by Prime Implicants')
 
     s = solbert.solver()
-
+    s.add([[1], [1,2]])
+    ret = s.solve()
+    if ret:
+        print(s.get_model())
     
 
 

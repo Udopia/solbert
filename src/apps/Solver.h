@@ -93,7 +93,7 @@ static PyObject* solve(Solver* self, PyObject* args) {
     std::vector<int> assumptions = list_to_vec(pyassumps);
 
     for (int lit : assumptions) {
-        ipasir_assume(self->solver, lit); // fix end of extensible disjunction
+        ipasir_assume(self->solver, lit);
     }
 
     int res = ipasir_solve(self->solver);
@@ -106,9 +106,33 @@ static PyObject* solve(Solver* self, PyObject* args) {
     }
 }
 
+/**
+ * @brief Return list of satisfied literals (projected on given list of vars)
+ * 
+ * 
+ * 
+ * @param self 
+ * @param args 
+ * @return PyObject* 
+ */
+static PyObject* get_model(Solver* self, PyObject* args) {
+    PyObject* pyvars;
+    PyArg_ParseTuple(args, "O", &pyvars);
+    std::vector<int> vars = list_to_vec(pyvars);
+
+    PyObject* obj = pylist();
+    for (int lit : vars) {
+        int val = ipasir_val(self->solver, lit);
+        pylist(obj, val);
+    }
+
+    return obj;
+}
+
 static PyMethodDef solver_methods[] = {
     { "add", (PyCFunction) add, METH_VARARGS, "add clauses" },
     { "solve", (PyCFunction) solve, METH_VARARGS, "solver under assumptions" },
+    { "get_model", (PyCFunction) get_model, METH_VARARGS, "return model" },
     { NULL }  /* Sentinel */
 };
 
