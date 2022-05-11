@@ -107,11 +107,11 @@ static PyObject* solve(Solver* self, PyObject* args) {
 }
 
 /**
- * @brief Return list of satisfied literals (projected on given list of vars)
+ * @brief Return list of satisfied literals (projected on given vars)
  * 
  * @param self 
  * @param args 
- * @return PyObject* 
+ * @return PyObject* list of vars for which to determine values
  */
 static PyObject* get_model(Solver* self, PyObject* args) {
     PyObject* pyvars;
