@@ -19,13 +19,52 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 
 #include <iostream>
 #include "src/util/CNFFormula.h"
+#include "lib/ipasir.h"
 
 int main(int argc, char** argv) {
     std::cout << "I am Solbert" << std::endl;
 
     CNFFormula f = CNFFormula(argv[1]);
-
     std::cout << f.nVars() << " " << f.nClauses() << std::endl;
 
+
+    
+    std::cout << ipasir_signature() << std::endl;
+
+    auto* s = ipasir_init();
+
+    for (Cl* clause : f) {
+        for (Lit lit : *clause) {
+            ipasir_add(s, lit);
+        }
+        ipasir_add(s, 0);
+    }
+
+    int ret = ipasir_solve(s);
+
+    if (ret == 10) {
+        std::cout << "satisfiable" << std::endl;
+
+        std::vector<int> vals;
+
+        for (unsigned i = 1; i <= f.nVars(); i++) {
+            int val = ipasir_val(s, i);
+            vals.push_back(val);
+            std::cout << val << " ";
+        }
+        std::cout << std::endl;
+
+        for (int lit : vals) {
+            ipasir_add(s, -lit);
+        }
+        ipasir_add(s, 0);
+    }
+    else if (ret == 20) {
+        std::cout << "unsatisfiable" << std::endl;
+    }
+    else {
+        std::cout << "foo" << std::endl;
+    }
+    
     return 0;
 }
