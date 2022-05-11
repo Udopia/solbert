@@ -1,0 +1,12 @@
+/home/iser/git/solbert/build/CMakeFiles/edit_cache.dir
+/home/iser/git/solbert/build/CMakeFiles/solbert.dir
+/home/iser/git/solbert/build/CMakeFiles/rebuild_cache.dir
+/home/iser/git/solbert/build/CMakeFiles/Cadical.dir
+/home/iser/git/solbert/build/src/CMakeFiles/rebuild_cache.dir
+/home/iser/git/solbert/build/src/CMakeFiles/edit_cache.dir
+/home/iser/git/solbert/build/src/util/CMakeFiles/rebuild_cache.dir
+/home/iser/git/solbert/build/src/util/CMakeFiles/edit_cache.dir
+/home/iser/git/solbert/build/src/util/CMakeFiles/util.dir
+/home/iser/git/solbert/build/src/apps/CMakeFiles/edit_cache.dir
+/home/iser/git/solbert/build/src/apps/CMakeFiles/rebuild_cache.dir
+/home/iser/git/solbert/build/src/apps/CMakeFiles/apps.dir

@@ -1,0 +1,10 @@
+# Hashes of file build rules.
+64ff9979b3efb40eb146cb27557cd816 CMakeFiles/Cadical
+f0116b6d6f1d7728447d645cbf6b266a CMakeFiles/Cadical-complete
+592e476cc0c6ff83ef6f552622d6fe6b cadical/src/Cadical-stamp/Cadical-build
+40076db489c56b871974ddefcab1339d cadical/src/Cadical-stamp/Cadical-configure
+a1aec4eab4a12dbceb529d030c5b8e64 cadical/src/Cadical-stamp/Cadical-download
+f341996f915faf9fcda534f762df983e cadical/src/Cadical-stamp/Cadical-install
+8723290421eb34d47be8284f22c444ec cadical/src/Cadical-stamp/Cadical-mkdir
+dbf0f46c2b239d6a2a865c3c685969c2 cadical/src/Cadical-stamp/Cadical-patch
+748acc9de32c5c22e17998378da2bbed cadical/src/Cadical-stamp/Cadical-update
