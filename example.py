@@ -28,9 +28,9 @@ def main():
 
     s = solbert.solver()
     s.add([[1], [1,2]])
-    ret = s.solve()
+    ret = s.solve([])
     if ret:
-        print(s.get_model())
+        print(s.get_model([1,2]))
     
 
 

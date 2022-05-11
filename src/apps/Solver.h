@@ -100,7 +100,7 @@ static PyObject* solve(Solver* self, PyObject* args) {
     if (res == 10) {
         Py_RETURN_TRUE;
     } else if (res == 20) {
-        Py_RETURN_FALSE;        
+        Py_RETURN_FALSE;
     } else {
         Py_RETURN_NONE;
     }
@@ -108,8 +108,6 @@ static PyObject* solve(Solver* self, PyObject* args) {
 
 /**
  * @brief Return list of satisfied literals (projected on given list of vars)
- * 
- * 
  * 
  * @param self 
  * @param args 
