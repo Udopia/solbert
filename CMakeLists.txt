@@ -31,9 +31,9 @@ add_library(solver STATIC IMPORTED)
 add_dependencies(solver Cadical)
 set_target_properties(solver PROPERTIES IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/cadical/src/Cadical/build/libcadical.a")
 
-find_package(LibArchive REQUIRED)
-include_directories(${LibArchive_INCLUDE_DIRS})
-set(LIBS ${LIBS} ${LibArchive_LIBRARIES})
+#find_package(LibArchive REQUIRED)
+#include_directories(${LibArchive_INCLUDE_DIRS})
+#set(LIBS ${LIBS} ${LibArchive_LIBRARIES})
 
 include_directories(solbert PUBLIC "${PROJECT_SOURCE_DIR}")
 

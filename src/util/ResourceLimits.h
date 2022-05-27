@@ -133,7 +133,8 @@ class ResourceLimits {
 
     void set_rlimits() const {
     #ifdef _WIN32
-        throw ResourceLimitsNotSupported();
+        std::cerr << "Warning: ResourceLimits not supported"
+        //throw ResourceLimitsNotSupported();
     #else
         struct rlimit limit;
 
