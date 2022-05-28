@@ -1,7 +1,7 @@
 # solbert - a Python wrapper module for IPASIR solvers (okay, CaDiCaL for now)
 
 
-* Installation: `./install_pymod.py`
+* Installation: `./install-pymod.sh`
 * For Hackers:
     * Minimal example usage: ./example.py
     * "solbert" module definition: src/solbert.cc
