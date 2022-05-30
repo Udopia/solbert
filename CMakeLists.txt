@@ -39,6 +39,8 @@ include_directories(solbert PUBLIC "${PROJECT_SOURCE_DIR}")
 
 add_subdirectory("src")
 
+set_target_properties(apps util PROPERTIES LINKER_LANGUAGE CXX)
+
 add_executable(solbert src/Main.cc)
 add_dependencies(solbert solver)
 target_link_libraries(solbert PUBLIC ${LIBS} solver $<TARGET_OBJECTS:apps> $<TARGET_OBJECTS:util>)
