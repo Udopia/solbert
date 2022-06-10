@@ -38,6 +38,7 @@ SOFTWARE.
 typedef struct Solver {
     PyObject_HEAD
     void* solver;
+    unsigned max_var;
 } Solver;
 
 /**
@@ -67,16 +68,22 @@ static PyObject* solver_delete(Solver* self) {
  * @return PyObject* 
  */
 static PyObject* add(Solver* self, PyObject* args) {
-    PyObject* pyformula;
-    PyArg_ParseTuple(args, "O", &pyformula);
-    std::vector<std::vector<int>> formula = list_to_formula(pyformula);
+    std::vector<std::vector<int>> formula;
+
+    PyObject* pyformula = nullptr;
+    if (PyArg_ParseTuple(args, "|O", &pyformula)) {
+        if (pyformula != nullptr) {
+            formula = list_to_formula(pyformula);
+        }
+    }
 
     for (auto& clause : formula) {
         for (int lit : clause) {
-            ipasir_add(self->solver, lit);        
+            ipasir_add(self->solver, lit);
+            self->max_var = std::max((unsigned)abs(lit), self->max_var);
         }
+        ipasir_add(self->solver, 0);
     }
-    ipasir_add(self->solver, 0);
 
     Py_RETURN_NONE;
 }
@@ -88,9 +95,14 @@ static PyObject* add(Solver* self, PyObject* args) {
  * @return PyObject* list of assumption literals
  */
 static PyObject* solve(Solver* self, PyObject* args) {
-    PyObject* pyassumps;
-    PyArg_ParseTuple(args, "O", &pyassumps);
-    std::vector<int> assumptions = list_to_vec(pyassumps);
+    std::vector<int> assumptions;
+    
+    PyObject* pyassumps = nullptr;
+    if (PyArg_ParseTuple(args, "|O", &pyassumps)) {    
+        if (pyassumps != nullptr) {
+            assumptions = list_to_vec(pyassumps);
+        }
+    }
 
     for (int lit : assumptions) {
         ipasir_assume(self->solver, lit);
@@ -114,9 +126,20 @@ static PyObject* solve(Solver* self, PyObject* args) {
  * @return PyObject* list of vars for which to determine values
  */
 static PyObject* get_model(Solver* self, PyObject* args) {
-    PyObject* pyvars;
-    PyArg_ParseTuple(args, "O", &pyvars);
-    std::vector<int> vars = list_to_vec(pyvars);
+    std::vector<int> vars;
+
+    PyObject* pyvars = nullptr;
+    if (PyArg_ParseTuple(args, "|O", &pyvars)) {
+        if (pyvars != nullptr) {
+            vars = list_to_vec(pyvars);
+        } else {
+            for (unsigned i = 1; i <= self->max_var; i++) {
+                vars.push_back(i);
+            }
+        }
+    } else {
+        Py_RETURN_NONE;
+    }
 
     PyObject* obj = pylist();
     for (int lit : vars) {
